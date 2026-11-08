@@ -32,7 +32,7 @@ services:
     rootDir: record-management-client
     envVars:
       - key: REACT_APP_API_URL
-        value: https://record-management-api.onrender.com
+        value: https://record-management-api-mmq6.onrender.com
     routes:
       - type: rewrite
         source: /*

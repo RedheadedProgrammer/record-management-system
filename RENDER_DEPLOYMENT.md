@@ -18,7 +18,7 @@ This project uses three Render resources: a PostgreSQL database, a Node.js API w
 6. Open the API service URL plus `/health`. A JSON response such as `{"status":"ok"}` confirms the web service is responding.
 7. Open the static site URL, create an account, sign in, and test employee, attendance, and payroll flows.
 
-The Blueprint generates `JWT_SECRET` and connects the API to the database through Render's database connection string. The configuration assumes the default service URLs `https://record-management-client.onrender.com` and `https://record-management-api.onrender.com`. Render service names must be available; if Render assigns different URLs, update `CLIENT_URL` on the API and `REACT_APP_API_URL` on the static site to match the actual deployed URLs, then redeploy both services.
+The Blueprint generates `JWT_SECRET` and connects the API to the database through Render's database connection string. The configured service URLs are `https://record-management-client.onrender.com` and `https://record-management-api-mmq6.onrender.com`. If Render assigns different URLs in another deployment, update `CLIENT_URL` on the API and `REACT_APP_API_URL` on the static site to match the actual deployed URLs, then redeploy both services.
 
 ## Manual setup alternative
 
