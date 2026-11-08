@@ -14,7 +14,7 @@ This project uses three Render resources: a PostgreSQL database, a Node.js API w
 2. Connect the GitHub repository containing this project.
 3. Review the resources from `render.yaml` and create the Blueprint.
 4. Wait for the PostgreSQL database, API service, and static site to finish provisioning and building.
-5. In the Render dashboard, open the PostgreSQL database and use its SQL console to run the contents of `database/schema.sql` once. The API requires these four tables before account registration or data operations will work.
+5. The API start command runs `npm run db:init` before starting the server. This creates the tables from `database/schema.sql` if they do not already exist. Check the API logs for `Database schema is ready.`
 6. Open the API service URL plus `/health`. A JSON response such as `{"status":"ok"}` confirms the web service is responding.
 7. Open the static site URL, create an account, sign in, and test employee, attendance, and payroll flows.
 
@@ -44,11 +44,11 @@ If you prefer not to use the Blueprint, create a Render PostgreSQL database, a N
 - **Environment variable:** `REACT_APP_API_URL` = the API service URL, including `https://` and without a trailing slash
 - Add a rewrite rule from `/*` to `/index.html` with action **Rewrite** so client-side routes resolve correctly.
 
-After creating both services, run `database/schema.sql` in the Render database SQL console. Set the static site's actual URL as `CLIENT_URL` on the API. Set the API's actual URL in `REACT_APP_API_URL` on the static site. Redeploy both services after changing environment variables.
+The API's `db:init` command creates missing tables from `database/schema.sql` when it starts. Set the static site's actual URL as `CLIENT_URL` on the API. Set the API's actual URL in `REACT_APP_API_URL` on the static site. Redeploy both services after changing environment variables.
 
 ## Database and data migration
 
-The included schema creates the application tables in a new Render database, but does not copy local records. If existing data must be retained, export it from the local database and import it into Render after the schema is created. Check the foreign-key relationships and ID sequences after importing. Protect database backups because employee and payroll data can be sensitive.
+The included schema creates the application tables in a new Render database, but does not copy local records. The API runs the idempotent initializer at startup; it creates missing tables without overwriting existing tables or records. If existing data must be retained, export it from the local database and import it into Render. Check the foreign-key relationships and ID sequences after importing. Protect database backups because employee and payroll data can be sensitive.
 
 ## Important production notes
 
