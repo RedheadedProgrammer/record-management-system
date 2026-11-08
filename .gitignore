@@ -1,0 +1,12 @@
+node_modules/
+record-management-client/node_modules/
+record-management-client/build/
+.env
+.env.*
+!.env.example
+*.log
+coverage/
+.venv/
+__pycache__/
+*.py[cod]
+~$*.pptx
